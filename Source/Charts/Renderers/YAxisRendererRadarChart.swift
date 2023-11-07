@@ -147,7 +147,7 @@ open class YAxisRendererRadarChart: YAxisRenderer
         let from = axis.isDrawBottomYLabelEntryEnabled ? 0 : 1
         let to = axis.isDrawTopYLabelEntryEnabled ? axis.entryCount : (axis.entryCount - 1)
 
-        let alignment = axis.labelAlignment
+        let alignment = TextAlignment.center
         let xOffset = axis.labelXOffset
 
         let entries = axis.entries[from..<to]
@@ -164,7 +164,7 @@ open class YAxisRendererRadarChart: YAxisRenderer
 //            )
             
             let x = p.x + xOffset
-            let image = UIImage(color: .darkGray)!
+            let image = UIImage(color: UIColor(red: 246/255.0, green: 246/255.0, blue: 246/255.0, alpha: 1))!
             
             if index == 0 {
                 context.drawImage(image, atCenter: CGPoint(x: x, y: p.y - labelLineHeight), size: .init(width: 20, height: labelLineHeight))
