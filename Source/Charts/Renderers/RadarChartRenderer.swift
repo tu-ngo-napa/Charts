@@ -386,7 +386,7 @@ open class RadarChartRenderer: LineRadarRenderer
             high.setDraw(pt: _highlightPointBuffer)
             
             // draw the lines
-            drawHighlightLines(context: context, point: _highlightPointBuffer, set: set)
+//            drawHighlightLines(context: context, point: _highlightPointBuffer, set: set)
             
             if set.isDrawHighlightCircleEnabled
             {
@@ -438,7 +438,7 @@ open class RadarChartRenderer: LineRadarRenderer
             }
             
             context.setFillColor(fillColor.cgColor)
-            context.fillPath(using: .evenOdd)
+            context.fillPath(using: .winding)
         }
             
         if let strokeColor = strokeColor

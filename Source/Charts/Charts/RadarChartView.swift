@@ -123,13 +123,6 @@ open class RadarChartView: PieRadarChartViewBase
             _yAxisRenderer.renderLimitLines(context: context)
         }
 
-        renderer.drawData(context: context)
-
-        if valuesToHighlight()
-        {
-            renderer.drawHighlighted(context: context, indices: highlighted)
-        }
-        
         if _yAxis.isEnabled && !_yAxis.isDrawLimitLinesBehindDataEnabled
         {
             _yAxisRenderer.renderLimitLines(context: context)
@@ -138,6 +131,12 @@ open class RadarChartView: PieRadarChartViewBase
         _yAxisRenderer.renderAxisLabels(context: context)
 
         renderer.drawValues(context: context)
+        renderer.drawData(context: context)
+        
+        if valuesToHighlight()
+        {
+            renderer.drawHighlighted(context: context, indices: highlighted)
+        }
 
         legendRenderer.renderLegend(context: context)
 

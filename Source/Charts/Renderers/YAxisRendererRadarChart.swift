@@ -155,13 +155,38 @@ open class YAxisRendererRadarChart: YAxisRenderer
             let r = CGFloat(entry - axis._axisMinimum) * factor
             let p = center.moving(distance: r, atAngle: chart.rotationAngle)
             let label = axis.getFormattedLabel(index)
-            context.drawText(
-                label,
-                at: CGPoint(x: p.x + xOffset, y: p.y - labelLineHeight),
-                align: alignment,
-                attributes: [.font: labelFont,
-                             .foregroundColor: labelTextColor]
-            )
+//            context.drawText(
+//                label,
+//                at: CGPoint(x: p.x + xOffset, y: p.y - labelLineHeight),
+//                align: alignment,
+//                attributes: [.font: labelFont,
+//                             .foregroundColor: labelTextColor]
+//            )
+            
+            let x = p.x + xOffset
+            let image = UIImage(color: .darkGray)!
+            
+            if index == 0 {
+                context.drawImage(image, atCenter: CGPoint(x: x, y: p.y - labelLineHeight), size: .init(width: 20, height: labelLineHeight))
+                context.drawText(
+                    label,
+                    at: CGPoint(x: x, y: p.y - labelLineHeight - 10),
+                    align: alignment,
+                    attributes: [.font: labelFont,
+                                 .foregroundColor: labelTextColor]
+                )
+            } else {
+                context.drawImage(image, atCenter: CGPoint(x: x, y: p.y), size: .init(width: 20, height: labelLineHeight))
+                context.drawText(
+                    label,
+                    at: CGPoint(x: x, y: p.y - labelLineHeight + 10),
+                    align: alignment,
+                    attributes: [.font: labelFont,
+                                 .foregroundColor: labelTextColor]
+                )
+            }
+           
+            
         }
     }
     
@@ -218,3 +243,18 @@ open class YAxisRendererRadarChart: YAxisRenderer
         }
     }
 }
+
+
+public extension UIImage {
+      convenience init?(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
+        let rect = CGRect(origin: .zero, size: size)
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
+        color.setFill()
+        UIRectFill(rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        guard let cgImage = image?.cgImage else { return nil }
+        self.init(cgImage: cgImage)
+      }
+    }
