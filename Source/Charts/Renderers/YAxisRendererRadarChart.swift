@@ -148,7 +148,7 @@ open class YAxisRendererRadarChart: YAxisRenderer
         let to = axis.isDrawTopYLabelEntryEnabled ? axis.entryCount : (axis.entryCount - 1)
 
         let alignment = TextAlignment.center
-        let xOffset = axis.labelXOffset
+        let xOffset: CGFloat = 0.0
 
         let entries = axis.entries[from..<to]
         entries.indexed().forEach { index, entry in
